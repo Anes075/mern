@@ -13,8 +13,11 @@ const router = express.Router();
 
 // This section will help you get a list of all the records.
 router.get("/", async (req, res) => {
+  console.log(req.body);
   let collection = await db.collection("records");
+  console.log(collection);
   let results = await collection.find({}).toArray();
+  console.log(results);
   res.send(results).status(200);
 });
 
