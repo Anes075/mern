@@ -49,7 +49,7 @@ export default function Record() {
   // This function will handle the submission.
   async function onSubmit(e) {
     e.preventDefault();
-    const person = { ...form };
+    const article = { ...form };
     try {
       let response;
       if (isNew) {
@@ -59,7 +59,7 @@ export default function Record() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(person),
+          body: JSON.stringify(article),
         });
       } else {
         // if we are updating a record we will PATCH to /record/:id.
@@ -68,7 +68,7 @@ export default function Record() {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(person),
+          body: JSON.stringify(article),
         });
       }
 
