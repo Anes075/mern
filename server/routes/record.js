@@ -35,9 +35,12 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     let newDocument = {
-      name: req.body.name,
-      position: req.body.position,
-      level: req.body.level,
+      articleNumber: req.body.articleNumber,
+      articleName: req.body.articleName,
+      unit: req.body.unit,
+      packageSize: req.body.packageSize,
+      purchasePrice: req.body.purchasePrice,
+      salesPrice: req.body.salesPrice
     };
     let collection = await db.collection("records");
     let result = await collection.insertOne(newDocument);
@@ -54,9 +57,12 @@ router.patch("/:id", async (req, res) => {
     const query = { _id: new ObjectId(req.params.id) };
     const updates = {
       $set: {
-        name: req.body.name,
-        position: req.body.position,
-        level: req.body.level,
+      articleNumber: req.body.articleNumber,
+      articleName: req.body.articleName,
+      unit: req.body.unit,
+      packageSize: req.body.packageSize,
+      purchasePrice: req.body.purchasePrice,
+      salesPrice: req.body.salesPrice
       },
     };
 

@@ -19,7 +19,7 @@ const connectDB = async () => {
     await mongoose.connect(
       "mongodb+srv://Anes:MongoMongo@cluster0.cqhwtsk.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
       {
-        dbName: "employees",
+        dbName: "Article",
       }
     );
     console.log("✅ MongoDB connected successfully");
@@ -32,12 +32,16 @@ const connectDB = async () => {
 // Record Schema
 const recordSchema = new mongoose.Schema(
   {
-    name: { type: String, required: true, trim: true },
-    position: { type: String, required: true, trim: true },
-    level: { type: String, required: true, trim: true },
+    articleNumber: { type: Number, required: true, trim: true },
+    articleName: { type: String, required: true, trim: true },
+    unit: { type: String, required: true, trim: true },
+    packageSize: { type: Number, required:true, trim: true},
+    purchasePrice: { type: Number, required: true, trim: true },
+    salesPrice: { type: Number, required:true, trim: true}
   },
   { timestamps: true }
 );
+
 
 const Record = mongoose.model("Record", recordSchema);
 
@@ -81,8 +85,8 @@ app.get("/record/:id", async (req, res) => {
 // Create record
 app.post("/record", async (req, res) => {
   try {
-    const { name, position, level } = req.body;
-    const record = new Record({ name, position, level });
+    const { articleNumber, articleName, unit, packageSize, purchasePrice, salesPrice } = req.body;
+    const record = new Record({ articleNumber, articleName, unit, packageSize, purchasePrice, salesPrice });
     const savedRecord = await record.save();
     res.status(201).json(savedRecord);
   } catch (error) {
