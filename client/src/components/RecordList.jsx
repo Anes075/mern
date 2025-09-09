@@ -47,7 +47,7 @@ const Record = (props) => (
 export default function RecordList() {
   const [records, setRecords] = useState([]);
   const [search, setSearch] = useState('');
-  const [sort, setSort] = useState({direction: 'asc'});
+  const [sort, setSort] = useState({ keyToSort:'Article Number' ,direction: 'asc'});
 
   const headers = [
     {
@@ -70,8 +70,8 @@ export default function RecordList() {
     }
   ]
 
-  function handleHeaderClick(id){
-    console.log(records[id]);
+  function handleHeaderClick(display,index){
+    console.log(display, index);
   }
 
   console.log(search);
@@ -138,24 +138,11 @@ export default function RecordList() {
               <table className="w-full caption-bottom text-sm">
                 <thead className="[&_tr]:border-b">
                   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                    <th onClick={() => handleHeaderClick(0)} className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                      Article Number
+                    {headers.map((header, index) =>(
+                    <th key={index} onClick={() => handleHeaderClick(header.display,index)} className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
+                      {header.display}
                     </th>
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                      Name
-                    </th>
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                      Unit
-                    </th>
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                      Package Size
-                    </th>
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                      Purchase Price
-                    </th>
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
-                      Sales Price
-                    </th>
+                    ))}
                   </tr>
                 </thead>
                 <tbody className="[&_tr:last-child]:border-0">
