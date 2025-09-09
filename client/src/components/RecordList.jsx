@@ -82,11 +82,14 @@ export default function RecordList() {
           : "desc"
   });
   //console.log(header);
-  //console.log(sort.keyToSort);
-  //console.log(sort.direction);
+  console.log(sort.keyToSort);
+  console.log(sort.direction);
+
+  // Updates the list
+  recordList();
   }
 
-  // Conpares the values alphanumeracally and returns a sorted list
+  // Conpares the values alphanumeracally and returns a sorted
   function getSortedArray(arrayToSort){
     if(sort.direction === "asc"){
       return arrayToSort.sort((a, b) =>(a[sort.keyToSort] > [b.keyToSort] ? 1 : -1));
@@ -123,7 +126,7 @@ export default function RecordList() {
 
   // This method will map out the records on the table
   function recordList() {
-    return records.filter((records) => {
+    return getSortedArray(records).filter((records) => {
       return search.toLowerCase() === '' ? records : records.articleName.toLowerCase().includes(search)
     }).map((record) => {
       return (
@@ -159,7 +162,7 @@ export default function RecordList() {
                 <thead className="[&_tr]:border-b">
                   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
                     {headers.map((header, index) =>(
-                    <th key={index} onClick={() => handleHeaderClick(header.display,index)} className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
+                    <th key={index} onClick={() => handleHeaderClick(header.display)} className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
                       {header.display}
                     </th>
                     ))}
