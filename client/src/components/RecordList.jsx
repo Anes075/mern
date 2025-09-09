@@ -47,7 +47,7 @@ const Record = (props) => (
 export default function RecordList() {
   const [records, setRecords] = useState([]);
   const [search, setSearch] = useState('');
-  const [sort, setSort] = useState({ keyToSort:'Article Number' ,direction: 'asc'});
+  const [sort, setSort] = useState({ keyToSort:"Article Number" ,direction: "asc"});
 
   const headers = [
     {
@@ -75,13 +75,20 @@ export default function RecordList() {
     setSort({
       keyToSort: header,
       direction:
-        header === sort.keyToSort ? sort.direction === 'asc' ? 'desc' : 'asc' : 'desc'
-  })
-  console.log(header);
+        header === sort.keyToSort
+         ? sort.direction === "asc"
+          ? "desc"
+          : "asc" 
+          : "desc"
+  });
+  //console.log(header);
+  //console.log(sort.keyToSort);
+  //console.log(sort.direction);
   }
 
+  // Conpares the values alphanumeracally and returns a sorted list
   function getSortedArray(arrayToSort){
-    if(sort.direction === 'asc'){
+    if(sort.direction === "asc"){
       return arrayToSort.sort((a, b) =>(a[sort.keyToSort] > [b.keyToSort] ? 1 : -1));
     }
     return arrayToSort.sort((a, b) =>(a[sort.keyToSort] > [b.keyToSort] ? -1 : -1));
