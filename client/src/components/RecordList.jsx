@@ -47,6 +47,33 @@ const Record = (props) => (
 export default function RecordList() {
   const [records, setRecords] = useState([]);
   const [search, setSearch] = useState('');
+  const [sort, setSort] = useState({direction: 'asc'});
+
+  const headers = [
+    {
+      display: "Article Number" 
+    },
+    {
+      display: "Article Name" 
+    },
+    {
+      display: "Unit" 
+    },
+    {
+      display: "Package Size" 
+    },
+    {
+      display: "Purchase Price" 
+    },
+    {
+      display: "Sales Price" 
+    }
+  ]
+
+  function handleHeaderClick(id){
+    console.log(records[id]);
+  }
+
   console.log(search);
 
   // This method fetches the records from the database.
@@ -81,7 +108,7 @@ export default function RecordList() {
     }).map((record) => {
       return (
         <Record
-          record={record}
+          record={record} 
           deleteRecord={() => deleteRecord(record._id)}
           key={record._id}
         />
@@ -111,7 +138,7 @@ export default function RecordList() {
               <table className="w-full caption-bottom text-sm">
                 <thead className="[&_tr]:border-b">
                   <tr className="border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted">
-                    <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
+                    <th onClick={() => handleHeaderClick(0)} className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
                       Article Number
                     </th>
                     <th className="h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0">
