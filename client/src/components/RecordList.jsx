@@ -70,11 +70,24 @@ export default function RecordList() {
     }
   ]
 
-  function handleHeaderClick(display,index){
-    console.log(display, index);
+  // This method checks which header was clicked to sort and which direction
+  function handleHeaderClick(header){
+    setSort({
+      keyToSort: header,
+      direction:
+        header === sort.keyToSort ? sort.direction === 'asc' ? 'desc' : 'asc' : 'desc'
+  })
+  console.log(header);
   }
 
-  console.log(search);
+  function getSortedArray(arrayToSort){
+    if(sort.direction === 'asc'){
+      return arrayToSort.sort((a, b) =>(a[sort.keyToSort] > [b.keyToSort] ? 1 : -1));
+    }
+    return arrayToSort.sort((a, b) =>(a[sort.keyToSort] > [b.keyToSort] ? -1 : -1));
+  }
+
+  // console.log(search);
 
   // This method fetches the records from the database.
   useEffect(() => {
