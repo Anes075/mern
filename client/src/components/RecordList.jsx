@@ -47,7 +47,7 @@ const Record = (props) => (
 export default function RecordList() {
   const [records, setRecords] = useState([]);
   const [search, setSearch] = useState('');
-  const [sort, setSort] = useState({ keyToSort:"Article Number" ,direction: "asc"});
+  const [sort, setSort] = useState({ headerToSort:"Article Number" ,direction: "asc"});
 
   const headers = [
     {
@@ -73,17 +73,17 @@ export default function RecordList() {
   // This method checks which header was clicked to sort and which direction
   function handleHeaderClick(header){
     setSort({
-      keyToSort: header,
+      headerToSort: header,
       direction:
-        header === sort.keyToSort
+        header === sort.headerToSort
          ? sort.direction === "asc"
           ? "desc"
           : "asc" 
           : "desc"
   });
-  //console.log(header);
-  console.log(sort.keyToSort);
-  console.log(sort.direction);
+  console.log(header);
+  //console.log(sort.headerToSort);
+  //console.log(sort.direction);
 
   // Updates the list
   recordList();
@@ -92,9 +92,9 @@ export default function RecordList() {
   // Conpares the values alphanumeracally and returns a sorted
   function getSortedArray(arrayToSort){
     if(sort.direction === "asc"){
-      return arrayToSort.sort((a, b) =>(a[sort.keyToSort] > [b.keyToSort] ? 1 : -1));
+      return arrayToSort.sort((a, b) =>(a[sort.headerToSort] > [b.headerToSort] ? 1 : -1));
     }
-    return arrayToSort.sort((a, b) =>(a[sort.keyToSort] > [b.keyToSort] ? -1 : -1));
+    return arrayToSort.sort((a, b) =>(a[sort.headerToSort] > [b.headerToSort] ? -1 : -1));
   }
 
   // console.log(search);
