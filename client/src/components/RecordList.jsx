@@ -47,7 +47,7 @@ const Record = (props) => (
 export default function RecordList() {
   const [records, setRecords] = useState([]);
   const [search, setSearch] = useState('');
-  const [sort, setSort] = useState({ headerToSort:"Article Number" ,direction: "asc"});
+  const [sort, setSort] = useState({ headerToSort:"" ,direction: "asc"});
 
   const headers = [
     {
@@ -76,14 +76,12 @@ export default function RecordList() {
       headerToSort: header,
       direction:
         header === sort.headerToSort
-         ? sort.direction === "asc"
-          ? "desc"
-          : "asc" 
-          : "desc"
+         ? sort.direction === "asc" ? "desc" : "asc" : "desc",
   });
-  console.log(header);
+
+  //console.log(header);
   //console.log(sort.headerToSort);
-  //console.log(sort.direction);
+  console.log(sort.direction);
 
   // Updates the list
   recordList();
@@ -94,7 +92,7 @@ export default function RecordList() {
     if(sort.direction === "asc"){
       return arrayToSort.sort((a, b) =>(a[sort.headerToSort] > [b.headerToSort] ? 1 : -1));
     }
-    return arrayToSort.sort((a, b) =>(a[sort.headerToSort] > [b.headerToSort] ? -1 : -1));
+    return arrayToSort.sort((a, b) =>(a[sort.headerToSort] > [b.headerToSort] ? -1 : 1));
   }
 
   // console.log(search);
